@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\userRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    public function store(request $request) {
+    public function store(userRequest $request) {
 
         $validated = $request->validated();
     
@@ -30,7 +31,7 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function update(Request $request, User $user) {
+    public function update(userRequest $request, User $user) {
     
         $validated = $request->validated();
 

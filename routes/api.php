@@ -5,4 +5,4 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::apiResource('books', BookController::class);
-Route::apiResource('user', UserController::class);
+Route::apiResource('users', UserController::class);
