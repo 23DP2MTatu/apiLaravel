@@ -15,16 +15,16 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    public function store(Request $request) {
-        // $validated = $request->validated();
+    public function store(userRequest $request) {
+        $validated = $request->validated();
     
-        // $validated['password'] = Hash::make($validated['password']);
+        $validated['password'] = Hash::make($validated['password']);
 
-        User::create($request);
+        User::create($validated);
         
         return response()->json([
             'message' => 'User added.',
-            'user' => new UserResource($request), 
+            'user' => new UserResource($validated), 
         ], 201);
     }   
 
