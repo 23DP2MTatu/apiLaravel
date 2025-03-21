@@ -20,11 +20,11 @@ class UserController extends Controller
     
         $validated['password'] = Hash::make($validated['password']);
 
-//        User::create($user);
+        User::create($validated);
         
         return response()->json([
             'message' => 'User added.',
-            'user' => new UserResource($validated), 
+//            'user' => new UserResource($validated), 
         ], 201);
     }   
 
