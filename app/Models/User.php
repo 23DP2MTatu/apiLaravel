@@ -10,4 +10,9 @@ class User extends Model
     use HasFactory;
     protected $table = 'users';
     protected $fillable = ['username','email','password'];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'userID');
+    }
 }
