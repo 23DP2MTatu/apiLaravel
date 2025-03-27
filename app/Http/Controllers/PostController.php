@@ -43,12 +43,13 @@ class PostController extends Controller
 
     function edit($id){
         $post = Post::find($id);
-    return view('PostEdit', compact('post'));
+        return view('PostEdit', compact('post'));
     }
 
     function update(PostRequest $request, Post $post) {
         
         $postValidated = $request -> validated();
+        
         $post->update($postValidated);
 
         return redirect()->route('post.store');
