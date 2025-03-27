@@ -1,4 +1,12 @@
-<a href="{{route('post.create')}}">create post</a>
+<div>
+    @if (Auth::check())
+    <a href="{{route('post.logout')}}">logout</a>
+    <a href="{{route('post.create')}}">create post</a>
+    @else
+        <a href="{{route('auth.login.show')}}">login</a>
+        <a href="{{route('auth.register.show')}}">register</a>
+    @endif
+</div>
 
 <div>
     <form action="{{ route('post.show') }}" method="get">
@@ -13,14 +21,17 @@
     <div>
         <h1>{{$post->title}}</h1>
         <p>{{$post->discription}}</p>
-        <p>{{$post->User->username}} , userID:{{$post->userID}}</p>
-        <a href="{{ route('post.edit', $post->id) }}">
-            <button>edit</button>
-        </a>
-        <form action="{{ route('post.delete', $post->id) }}" method="post">
-            @csrf
-            @method('DELETE')
-            <button type="submit">delete</button>
-        </form>
+        <p>{{$post->User->username}}#{{$post->userID}}</p>
+        
+        @if(Auth::id() == $post->userID)
+            <a href="{{ route('post.edit', $post->id) }}">
+                <button>edit</button>
+            </a>
+            <form action="{{ route('post.delete', $post->id) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit">delete</button>
+            </form>
+        @endif
     </div>
 @endforeach

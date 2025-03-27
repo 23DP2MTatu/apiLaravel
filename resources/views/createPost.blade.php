@@ -10,9 +10,5 @@
         <label for="discription">Discription</label>
         <textarea name="discription" id="discription" placeholder="Enter the discription"></textarea>
     </div>
-    <div>
-        <label for="userID">UserID</label>
-        <input type="number" name="userID" id="userID" placeholder="Enter the UserID">
-    </div>
     <button type="submit">create</button>
 </form>

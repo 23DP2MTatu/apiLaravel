@@ -7,6 +7,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -22,9 +23,13 @@ class PostController extends Controller
     }
 
     function store(PostRequest $request) {
-
+        
+        $userID = Auth::id();
+        
         $post = $request -> validated();
-
+        
+        $post['userID'] = $userID;
+        
         Post::create($post);
         return redirect()->route('post.store');
     }
