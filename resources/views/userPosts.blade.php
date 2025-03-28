@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 <div class="container w-75 mt-3 justify-content-center">
-<h1>{{ $posts->first()->user->username }}'s Profile</h1>
+<h1>{{ $user -> username }}'s Profile</h1>
     @foreach($posts as $post)
         <div class="card border-secondary mb-3 w-100" style="width: 10rem">
             <div class="card-header">{{$post->title}}</div>

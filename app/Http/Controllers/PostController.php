@@ -43,7 +43,7 @@ class PostController extends Controller
         }
 
         $posts = $user->posts;
-        return view('userPosts', compact('posts'));
+        return view('userPosts', compact('posts','user'));
     }
 
     function edit($id){
