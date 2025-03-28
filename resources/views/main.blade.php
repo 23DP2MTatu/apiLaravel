@@ -1,37 +1,29 @@
-<div>
-    @if (Auth::check())
-    <a href="{{route('post.logout')}}">logout</a>
-    <a href="{{route('post.create')}}">create post</a>
-    @else
-        <a href="{{route('auth.login.show')}}">login</a>
-        <a href="{{route('auth.register.show')}}">register</a>
-    @endif
-</div>
+@extends('layouts.layout')
+@section('content')
 
-<div>
-    <form action="{{ route('post.show') }}" method="get">
-        @csrf
-        <label for="userID">search</label>
-        <input type="number" name="userID" id="userID" placeholder="find user posts by id" >
-        <button type="submit">search</button>
-    </form>    
-</div>
-
-@foreach($posts as $post)
-    <div>
-        <h1>{{$post->title}}</h1>
-        <p>{{$post->discription}}</p>
-        <p>{{$post->User->username}}#{{$post->userID}}</p>
+<div class="container w-75 mt-3 justify-content-center">
+    @foreach($posts as $post)
         
-        @if(Auth::id() == $post->userID)
-            <a href="{{ route('post.edit', $post->id) }}">
-                <button>edit</button>
-            </a>
-            <form action="{{ route('post.delete', $post->id) }}" method="post">
-                @csrf
-                @method('DELETE')
-                <button type="submit">delete</button>
-            </form>
-        @endif
-    </div>
-@endforeach
+        <div class="card border-secondary mb-3 w-100" style="width: 10rem;">
+            <div class="card-header">{{$post->title}}</div>
+            <div class="m-2 mb-0">
+                <p class="card-text">{{$post->discription}}</p>
+                <p class="">{{$post->User->username}}#{{$post->userID}}</p>
+            </div>
+            
+            @if(Auth::id() == $post->userID)
+                <div class="d-flex">
+                <a href="{{ route('post.edit', $post->id) }}" class="btn btn-secondary btn-sm m-1" style="width: 10rem">Edit</a>
+                
+                <form action="{{ route('post.delete', $post->id) }}" onsubmit="return confirm('Are you sure you want to delete this post?');" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-secondary btn-sm m-1" style="width: 10rem">delete</button>
+                </form>
+            </div>
+            @endif
+        </div>
+    @endforeach
+</div>
+
+@endsection

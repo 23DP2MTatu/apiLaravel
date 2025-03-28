@@ -35,7 +35,12 @@ class PostController extends Controller
     }
 
     function show(Request $request) {
+        
         $user = User::find($request->input('userID'));
+        
+        if (!$user) {
+            $user = User::find(Auth::id());
+        }
 
         $posts = $user->posts;
         return view('userPosts', compact('posts'));
